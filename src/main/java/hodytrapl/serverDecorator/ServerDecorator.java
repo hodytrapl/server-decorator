@@ -6,12 +6,16 @@ public final class ServerDecorator extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
+        log("плагин Server decorator включен");
 
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        log("плагин Server decorator выключен");
+    }
+
+    public void log(String msg){
+        getLogger().info(msg);
     }
 }
