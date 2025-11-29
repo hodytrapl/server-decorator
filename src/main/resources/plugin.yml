@@ -1,4 +1,4 @@
-name: Server decorator
+name: Server-decorator
 version: '1.0-SNAPSHOT'
 main: hodytrapl.serverDecorator.ServerDecorator
 api-version: '1.21'
