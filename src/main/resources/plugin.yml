@@ -5,3 +5,14 @@ api-version: '1.21'
 authors: [ hodytrapl ]
 description: plugin for my server
 website: githublink
+
+
+commands:
+  servdecor:
+    description: Управление ролями сервера
+    usage: /servdecor role <add|remove|update|give|list>
+    permission: serverdecorator.admin
+permissions:
+  serverdecorator.admin:
+    description: Доступ к управлению ролями
+    default: op
