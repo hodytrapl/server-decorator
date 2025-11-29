@@ -1,0 +1,7 @@
+name: Server decorator
+version: '1.0-SNAPSHOT'
+main: hodytrapl.serverDecorator.ServerDecorator
+api-version: '1.21'
+authors: [ hodytrapl ]
+description: plugin for my server
+website: githublink
