@@ -1,13 +1,14 @@
 package hodytrapl.serverDecorator.chatFormatter;
 
 import hodytrapl.serverDecorator.Debugger;
-import hodytrapl.serverDecorator.PlayerDataEducator.PlayerFormatData;
 import hodytrapl.serverDecorator.ServerDecorator;
-import hodytrapl.serverDecorator.PlayerDataEducator.PlayerDataManager;
 import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,18 +17,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class ChatFormatter {
+public class ChatFormatter implements Listener {
 
     private final ServerDecorator plugin;
     private final Debugger debugger;
-    private final PlayerDataManager dataManager;
-    private final Map<UUID, PlayerFormatData> playerDataCache;
-
     public ChatFormatter(ServerDecorator plugin) {
         this.plugin = plugin;
         this.debugger = plugin.getDebugger();
-        this.dataManager = new PlayerDataManager(plugin);
-        this.playerDataCache = new HashMap<>();
+    }
+    @EventHandler
+    public void onChat(AsyncChatEvent event){
+        event.renderer((source,SourceDisplayName,message,viewer)->
+                Component.text("あ", NamedTextColor.WHITE)
+                .append(Component.text("[", NamedTextColor.DARK_PURPLE))
+                .append(SourceDisplayName.color(NamedTextColor.LIGHT_PURPLE))
+                .append(Component.text("]", NamedTextColor.DARK_PURPLE))
+                .append(Component.text(": ", NamedTextColor.WHITE))
+                .append(message.color(NamedTextColor.WHITE)));
     }
 
 }

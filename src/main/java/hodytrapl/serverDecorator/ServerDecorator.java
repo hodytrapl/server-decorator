@@ -1,6 +1,6 @@
 package hodytrapl.serverDecorator;
 
-import hodytrapl.serverDecorator.CommandList.RoleCommand;
+import hodytrapl.serverDecorator.CustomBar.CustomBar;
 import hodytrapl.serverDecorator.chatFormatter.ChatFormatter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,16 +10,12 @@ public final class ServerDecorator extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Создаем папку плагина если её нет
-        if (!getDataFolder().exists()) {
-            getDataFolder().mkdirs();
-        }
 
         this.debugger = new Debugger(this);
         debugger.sendPluginLoadMessage();
 
-        ChatFormatter chatFormatter = new ChatFormatter(this);
-        //getServer().getPluginManager().registerEvents(chatFormatter, this);
+        getServer().getPluginManager().registerEvents(new ChatFormatter(this), this);
+        getServer().getPluginManager().registerEvents(new CustomBar(), this);
 
         log("плагин Server decorator включен");
     }

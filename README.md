@@ -16,9 +16,13 @@
 Данный проект является учебным для меня.
 В данном плагине вы сможете:
 * [ ] [Изменять Tab](#изменяет-tab)
-* [ ] [Декоративный чат](#декоративный-чат)
+* [X] [Декоративный чат](#декоративный-чат)
+  - [X] работает
+  - [ ] файлы конфигурации цветов и ролей
+  - [ ] команды редактирования текста
 * [ ] [Кастомизированный Sidebar](#кастомизированый-sidebar)
 * [X] [Добавлять свои кастомные значки](#значки-в-чате)
+  - [X] работает
 
 > [!IMPORTANT]
 > Для значков в чате нужно скачать ресурспак, который находится в корневой папке плагина.
@@ -26,19 +30,24 @@
 Если плагин станет популярным, я добавлю возможность редактировать настройки через команды в игре, без необходимости редактировать файлы плагина.
 
 ## Изменяет Tab
-Описание функционала изменения Tab...
+![see custom tab](images%20ReadMe/tabExample.png)
+Может Добавить красивый таб. Сверху: имя и айпи, Снизу: ранг,статистика сервера и реклама сервера
 
 ## Декоративный чат
-Формат: `badge[nickname]: <message>`
+![see custom chat](images%20ReadMe/chatExample.png)
+Формат: `badge[nickname]: <message>`<br>
+
 
 ## Кастомизированый Sidebar
 Описание функционала кастомизированного Sidebar...
 
 ## Значки в чате
-Описание функционала значков в чате...
+![see custom badge](images%20ReadMe/badgeExample.png)<br>
+Данные значки продемострированы в разделе ["Декоративный чат"](#декоративный-чат).<br>
+Он видин в начале скобок. По факту это измененый японский иероглиф - "あ", но с другой текстурой <br>
 
 ## Картинки
-![see custom tab](tabExample.png)
-![see custom chat](chatExample.png)
-![see custom sidebar](sidebarExample.png)
-![see custom sidebar](badgeExample.png)
+![see custom tab](images%20ReadMe/tabExample.png)
+![see custom chat](images%20ReadMe/chatExample.png)
+![see custom sidebar](images%20ReadMe/sidebarExample.png)
+![see custom badge](images%20ReadMe/badgeExample.png)
