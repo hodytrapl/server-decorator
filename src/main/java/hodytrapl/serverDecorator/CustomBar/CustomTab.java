@@ -1,9 +1,9 @@
 package hodytrapl.serverDecorator.CustomBar;
 
 import hodytrapl.serverDecorator.Misc.Misc;
+import hodytrapl.serverDecorator.Misc.fileManager.ConfigManager;
 import hodytrapl.serverDecorator.ServerDecorator;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,13 +13,20 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 
 public class CustomTab implements Listener {
     private final ServerDecorator plugin;
+    private final ConfigManager confM;
+    Map<String, Set<String>> tabEntries;
 
-
-    public CustomTab(ServerDecorator plugin){
+    public CustomTab(ServerDecorator plugin, ConfigManager confM){
         this.plugin = plugin;
+        this.confM = confM;
+        this.tabEntries = new HashMap<>();
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
@@ -54,11 +61,16 @@ public class CustomTab implements Listener {
 
 
     public void UpdaterTab(Player player) {
-        final String SERVERNAME = "Create SMP";
-        final String IPSERVER = "play.serverip.net";
+        final String SERVERNAME = confM.getServerName();
+        final String SERVERTITLECOLOR = confM.getServerTitleColor();
+        final String SERVERTITLEFONT = confM.getServerTitleFont();
+        final String IPSERVER = confM.getIpAddress();
         int onlineCount = Bukkit.getOnlinePlayers().size();
         int maxPlayers = Bukkit.getMaxPlayers();
         int[] tps = getTPS();
+
+        Component headerdd= Component.empty();
+        Component footerdd= Component.empty();
 
         Component OBFUSCATEDtext =
                 Component.text( "f")
@@ -66,13 +78,13 @@ public class CustomTab implements Listener {
 
         Component DecorServerName =
                 Component.text(" ")
-                    .append(Component.text( SERVERNAME, NamedTextColor.GOLD))
+                    .append(Component.text(SERVERTITLECOLOR+SERVERTITLEFONT+SERVERNAME))
                     .append(Component.text(" "));
 
         Component DecorIPserver =
-                Component.text("│ ", NamedTextColor.GRAY)
-                    .append(Component.text( IPSERVER, NamedTextColor.GRAY))
-                    .append(Component.text(" │", NamedTextColor.GRAY));
+                Component.text(confM.getUnimportantColor()+"│ ")
+                    .append(Component.text( confM.getUnimportantColor()+IPSERVER))
+                    .append(Component.text(confM.getUnimportantColor()+" │"));
 
         Component header =
                 Component.empty()
@@ -84,21 +96,21 @@ public class CustomTab implements Listener {
 
 
         Component socialLink = Component.empty()
-                .append(Component.text("SocialWeb: ", NamedTextColor.GRAY))
-                .append(Component.text("Link", NamedTextColor.GRAY))
-                .append(Component.text(" │ ", NamedTextColor.DARK_GRAY))
-                .append(Component.text("WebSite: ", NamedTextColor.GRAY))
-                .append(Component.text("Link", NamedTextColor.GRAY));
+                .append(Component.text(confM.getUnimportantColor()+"SocialWeb: "))
+                .append(Component.text(confM.getUnimportantColor()+"Link"))
+                .append(Component.text(confM.getUnimportantColor()+" │ "))
+                .append(Component.text(confM.getUnimportantColor()+"WebSite: "))
+                .append(Component.text(confM.getUnimportantColor()+"Link"));
 
 
         Component serverStats = Component.empty()
-                .append(Component.text("Игроков онлайн: ", NamedTextColor.LIGHT_PURPLE))
-                .append(Component.text(Misc.getStatusColor(onlineCount, (int)(maxPlayers*0.25), (int)(maxPlayers*0.75)) + onlineCount))
-                .append(Component.text(Misc.getStatusColor(onlineCount, (int)(maxPlayers*0.25), (int)(maxPlayers*0.75)) + "/"))
-                .append(Component.text(Misc.getStatusColor(onlineCount, (int)(maxPlayers*0.25), (int)(maxPlayers*0.75)) + maxPlayers))
+                .append(Component.text(confM.getMainColor()+"Игроков онлайн: "))
+                .append(Component.text(Misc.getStatusColor(confM,onlineCount, (int)(maxPlayers*0.25), (int)(maxPlayers*0.75)) + onlineCount))
+                .append(Component.text(Misc.getStatusColor(confM,onlineCount, (int)(maxPlayers*0.25), (int)(maxPlayers*0.75)) + "/"))
+                .append(Component.text(Misc.getStatusColor(confM,onlineCount, (int)(maxPlayers*0.25), (int)(maxPlayers*0.75)) + maxPlayers))
                 .append(Component.newline())
-                .append(Component.text("TPS: ", NamedTextColor.LIGHT_PURPLE))
-                .append(Component.text(Misc.getStatusColor(tps[0], 5, 15) + tps[0]));
+                .append(Component.text(confM.getMainColor()+"TPS: "))
+                .append(Component.text(Misc.getStatusColor(confM,tps[0], 5, 15) + tps[0]));
 
         Component footer = Component.empty()
                 .append(socialLink)

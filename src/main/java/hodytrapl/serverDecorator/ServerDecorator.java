@@ -3,6 +3,7 @@ package hodytrapl.serverDecorator;
 import hodytrapl.serverDecorator.BelowName.BelowName;
 import hodytrapl.serverDecorator.CustomBar.CustomTab;
 import hodytrapl.serverDecorator.JoinServer.JoinServer;
+import hodytrapl.serverDecorator.Misc.fileManager.ConfigManager;
 import hodytrapl.serverDecorator.SideBar.SideBar;
 import hodytrapl.serverDecorator.chatFormatter.ChatFormatter;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,18 +11,22 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class ServerDecorator extends JavaPlugin {
 
     private Debugger debugger;
-    private SideBar sideBar;
+    private ConfigManager configManager;
 
     @Override
     public void onEnable() {
+        if (!getDataFolder().exists()) {
+            getDataFolder().mkdirs();
+        }
+
 
         this.debugger = new Debugger(this);
         debugger.sendPluginLoadMessage();
+        configManager = new ConfigManager(this);
 
-        this.sideBar = new SideBar(this);
 
-        getServer().getPluginManager().registerEvents(new ChatFormatter(this), this);
-        getServer().getPluginManager().registerEvents(new CustomTab(this), this);
+        getServer().getPluginManager().registerEvents(new ChatFormatter(this,configManager), this);
+        getServer().getPluginManager().registerEvents(new CustomTab(this,configManager), this);
         getServer().getPluginManager().registerEvents(new JoinServer(), this);
         getServer().getPluginManager().registerEvents(new BelowName(this), this);
 
@@ -40,5 +45,4 @@ public final class ServerDecorator extends JavaPlugin {
     public Debugger getDebugger() {
         return debugger;
     }
-
 }

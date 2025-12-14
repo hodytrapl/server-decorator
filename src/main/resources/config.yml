@@ -1,0 +1,20 @@
+config:
+
+  server:
+    server_name: "ServerName"
+    server_title_color: "§6"
+    server_title_font: "§l§o"
+    ip_address: "IpAddress"
+
+  theme:
+    main_color: "§d"
+    sub_color: "§5"
+
+    status:
+      terrible_color: "§c"
+      warning_color: "§e"
+      good_color: "§a"
+      unimportant_color: "§7"
+
+    chat:
+      message_color: "§f"
