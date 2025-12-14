@@ -39,4 +39,18 @@ public class Debugger {
             player.sendMessage(tellrawMessage);
         }
     }
+
+    public void sendDebugMessage(String msg,NamedTextColor color){
+        if (!enabled) return;
+
+        Component tellrawMessage = Component.text()
+                .append(Component.text(msg, color))
+                .build();
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.sendMessage(tellrawMessage);
+        }
+    }
+
+
 }
